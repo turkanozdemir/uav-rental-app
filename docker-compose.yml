@@ -17,7 +17,9 @@ services:
       - uav_rental_data:/var/lib/postgresql/data
 
   uav-rental-app:
-    build: uavrentalapi/
+    build: 
+      context: ./uavrentalapi
+      dockerfile: Dockerfile
     image: uav-rental-app:latest
     container_name: uav-rental-app
     networks:
@@ -28,7 +30,9 @@ services:
       - "8000:8000"
 
   uav-rental-ui:
-      build: uavrentalportal/
+      build: 
+        context: ./uavrentalportal
+        dockerfile: Dockerfile
       image: uav-rental-ui:latest
       container_name: uav-rental-ui
       networks:
