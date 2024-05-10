@@ -1,0 +1,19 @@
+# Django specific files
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+# Static files
+/static/
+# if you manage static files in production, remove the next line
+/staticfiles/
+
+# Media files
+/media/
+
+# Virtual environment
+venv/
+env/
+*.pyc

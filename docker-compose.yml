@@ -1,0 +1,45 @@
+version: '3'
+services:
+  uav-rental-app-db:
+    image: postgres:16.2
+    container_name: uav-rental-app-db
+    environment:
+      POSTGRES_DB: uav-rental
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    networks:
+      uav-rental:
+        aliases:
+          - db.uavrental.com
+    ports:
+      - "5432:5432"
+    volumes:
+      - uav_rental_data:/var/lib/postgresql/data
+
+  uav-rental-app:
+    build: uavrentalapi/
+    image: uav-rental-app:latest
+    container_name: uav-rental-app
+    networks:
+      uav-rental:
+        aliases:
+          - app.uavrental.com
+    ports:
+      - "8000:8000"
+
+  uav-rental-ui:
+      build: uavrentalportal/
+      image: uav-rental-ui:latest
+      container_name: uav-rental-ui
+      networks:
+        uav-rental:
+          aliases:
+            - ui.uavrental.com
+      ports:
+        - "3000:3000"
+networks:
+  uav-rental: { }
+
+volumes:
+  uav_rental_data:
+  
